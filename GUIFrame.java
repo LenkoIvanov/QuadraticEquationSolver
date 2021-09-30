@@ -69,32 +69,41 @@ public class GUIFrame extends JFrame implements ActionListener{
         add(row3, BorderLayout.SOUTH);
 
         setVisible(true);
-        pack();
+        setLocationRelativeTo(null);
         setResizable(false);
+        pack();
+    }
+
+    public void QuadraticSolver(){
+        double a = Double.parseDouble(aEntry.getText());
+        double b = Double.parseDouble(bEntry.getText());
+        double c = Double.parseDouble(cEntry.getText());
+        double delta = Math.pow(b,2.0) - (4.0*a*c);
+        if(delta > 0.0){
+            double x1 = ((-b) + Math.sqrt(delta))/(2.0 * a);
+            double x2 = ((-b) - Math.sqrt(delta))/(2.0 * a);
+            outX1.setText(String.valueOf(x1));
+            outX2.setText(String.valueOf(x2));
+            outX.setText("0");
+        }
+        else if(delta == 0.0){
+            double x = (-b)/(2.0 * a);
+            outX1.setText("0");
+            outX2.setText("0");
+            outX.setText(String.valueOf(x));
+        }
+        else{
+            JOptionPane.showMessageDialog(new JFrame(), "No real roots!", "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void actionPerformed(ActionEvent e){
-        String s1 = aEntry.getText();
-        String s2 = bEntry.getText();
-        String s3 = cEntry.getText();
-        //int a = Integer.parseInt(s1);
-       // int b = Integer.parseInt(s2);
-        //int c = Integer.parseInt(s3);
-       // int x1 = 0;
-       // int x2 = 0;
-       // int x = 0;
         if(e.getSource() == calc){
-           // EntryPoint.quadraticSolver(a,b,c,x1,x2,x);
-            //String s4 = String.valueOf(x1);
-           // String s5 = String.valueOf(x2);
-            //String s6 = String.valueOf(x);
-            outX1.setText(s1);
-            outX2.setText(s2);
-            outX.setText(s3);
+           QuadraticSolver();
         }
         else{
-            //
-
+            // graph button goes here
         }
     }
 
